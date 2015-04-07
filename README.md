@@ -2,6 +2,8 @@
 
 Generated jade code using a jade AST
 
+[![Build Status](https://img.shields.io/travis/yangsu/jade-generator/master.svg)](https://travis-ci.org/yangsu/jade-generator)
+
 ## Installation
 
     npm install jade-generator
