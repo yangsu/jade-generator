@@ -1,7 +1,4 @@
 _ = require('lodash')
-parse = require('jade-parser')
-lex = require('jade-lexer')
-walk = require('jade-walk')
 serializers = require('./serializers')
 {inspect} = require('util')
 

@@ -1,27 +1,35 @@
 {
   "name": "jade-generator",
   "version": "0.0.1",
-  "description": "",
+  "description": "Jade code generator",
   "main": "index.js",
   "directories": {
     "test": "test"
   },
   "dependencies": {
     "coffee-script": "^1.9.1",
-    "jade-lexer": "^0.0.3",
-    "jade-parser": "^0.0.2",
-    "jade-walk": "^0.0.1",
     "lodash": "^3.6.0"
   },
   "devDependencies": {
-    "q": "^1.2.0",
-    "jade": "^1.9.2",
     "chai": "~1.9.0",
-    "mocha": "~1.17.1"
+    "jade": "^1.9.2",
+    "jade-lexer": "^0.0.3",
+    "jade-parser": "^0.0.2",
+    "jade-walk": "^0.0.1",
+    "mocha": "~1.17.1",
+    "q": "^1.2.0"
   },
   "scripts": {
-    "test": "./node_modules/.bin/_mocha --compilers coffee:coffee-script/register --reporter spec test"
+    "test": "_mocha --compilers coffee:coffee-script/register --reporter spec test"
   },
   "author": "@yangsu",
-  "license": "BSD"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yangsu/jade-generator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yangsu/jade-generator/issues"
+  },
+  "homepage": "https://github.com/yangsu/jade-generator"
 }
