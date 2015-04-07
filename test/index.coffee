@@ -14,21 +14,22 @@ dirfile = (f) -> path.join(casesPath, f)
 readFile = (f) -> fs.readFileSync(dirfile(f), 'utf8')
 writeFile = (f, content) -> fs.writeFileSync(dirfile(f), content, 'utf8')
 
-cases = _.filter fs.readdirSync(casesPath), (testCase) -> not /\.generated/.test(testCase)
+cases = _.filter fs.readdirSync(casesPath), (testCase) ->
+  not /\.generated/.test(testCase) and
+  /\.jade$/.test(testCase) and
+  # TODO: support inline-tag
+  testCase isnt 'inline-tag.jade'
 
-stripLineNumbers = (ast) ->
-  walk ast, (node, replace) -> replace(_.omit(node, 'line'))
+stripUnsupportedProperties = (ast) ->
+  walk ast, (node, replace) -> replace(_.omit(node, 'line', 'selfClosing'))
 
 describe 'cases', ->
-  start = 2
-  end = start + 1
-  _.each cases[start...end], (testCase) ->
-    describe "#{testCase}:", ->
+  _.each cases, (testCase, i) ->
+    describe "#{i}. #{testCase}:", ->
       it "resulting source should have the same ast as the original", ->
-        content = readFile(testCase)
-        {ast, source, result} = lib(testCase, content)
+        ast = parse(lex(readFile(testCase), testCase))
+        result = lib(ast)
         writeFile(testCase.replace('.jade', '.generated.jade'), result)
-        # console.log result
         newAst = parse(lex(result, testCase))
 
-        assert.deepEqual stripLineNumbers(ast), stripLineNumbers(newAst)
+        assert.deepEqual stripUnsupportedProperties(ast), stripUnsupportedProperties(newAst)

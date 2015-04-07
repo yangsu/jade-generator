@@ -1,0 +1,47 @@
+- var users = []
+ul
+  for user, $index in users
+    li= user.name
+  else
+    li
+      | no users!
+- var users = [{ name: 'tobi', friends: ['loki'] }, { name: 'loki' }]
+if users
+  ul
+    for user, $index in users
+      li= user.name
+    else
+      li
+        | no users!
+- var user = { name: 'tobi', age: 10 }
+ul
+  for val, key in user
+    li
+      | #{key}: #{val}
+  else
+    li
+      | user has no details!
+- var user = {}
+ul
+  for prop, key in user
+    li
+      | #{key}: #{val}
+  else
+    li
+      | user has no details!
+ul
+  for prop, key in user
+    li
+      | #{key}: #{val}
+  else
+    li
+      | user has no details!
+- var user = Object.create(null)
+- user.name = 'tobi'
+ul
+  for val, key in user
+    li
+      | #{key}: #{val}
+  else
+    li
+      | user has no details!

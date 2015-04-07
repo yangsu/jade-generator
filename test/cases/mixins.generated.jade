@@ -1,0 +1,30 @@
+mixin comment(title, str)
+  div.comment
+    h2= title
+    p.body= str
+mixin comment(title, str)
+  div.comment
+    h2= title
+    p.body= str
+div#user
+  h1
+    | Tobi
+  div.comments
+    +comment('This',
+            (('is regular, javascript')))
+mixin list
+  ul
+    li
+      | foo
+    li
+      | bar
+    li
+      | baz
+body
+  mixin list
+  +list()
+  +list()
+mixin foobar(str)
+  div#interpolation= str + 'interpolated'
+- var suffix = "bar"
++#{'foo' + suffix}('This is ')

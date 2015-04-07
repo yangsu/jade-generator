@@ -20,7 +20,7 @@
     "mocha": "~1.17.1"
   },
   "scripts": {
-    "test": "./node_modules/.bin/_mocha --compilers coffee:coffee-script/register --reporter spec test/*"
+    "test": "./node_modules/.bin/_mocha --compilers coffee:coffee-script/register --reporter spec test"
   },
   "author": "@yangsu",
   "license": "BSD"
