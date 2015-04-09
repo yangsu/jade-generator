@@ -4,7 +4,7 @@ Generated jade code using a jade AST
 
 [![Build Status](https://img.shields.io/travis/yangsu/jade-generator/master.svg)](https://travis-ci.org/yangsu/jade-generator)
 [![Dependency Status](https://img.shields.io/gemnasium/yangsu/jade-generator.svg)](https://gemnasium.com/yangsu/jade-generator)
-
+[![NPM version](https://img.shields.io/npm/v/jade-generator.svg)](https://www.npmjs.org/package/jade-generator)
 
 ## Installation
 
