@@ -5,7 +5,6 @@ _ = require('lodash')
 {assert} = require('chai')
 parse = require('jade-parser')
 lex = require('jade-lexer')
-walk = require('jade-walk')
 lib = require('../')
 
 casesPath = "#{__dirname}/cases"

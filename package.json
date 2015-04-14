@@ -15,7 +15,6 @@
     "jade": "^1.9.2",
     "jade-lexer": "^0.0.4",
     "jade-parser": "^0.0.5",
-    "jade-walk": "https://github.com/yangsu/jade-walk/tarball/master",
     "mocha": "^2.2.4",
     "q": "^1.2.0"
   },
