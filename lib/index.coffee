@@ -14,7 +14,7 @@ serializeNode = (node, options, indentLevel = 0) ->
   serializer = serializers[node.type]
   if serializer?
     serialized = serializer(node, options)
-    if serialized.length
+    if serialized.length and serialized isnt '\n'
       indent(options, indentLevel) + serialized
     else
       serialized
@@ -27,8 +27,13 @@ serializeAST = (ast, options, indentLevel = 0) ->
   switch ast.type
     when 'NamedBlock', 'Block'
       children = _.chain(ast.nodes)
-        .map((node) -> serializeAST(node, options, indentLevel + 1))
-        .filter((str) -> _.isString(str))
+        .map (node) ->
+          if node.type is 'Block' and not node.yield
+            newIndentLevel = indentLevel
+          else
+            newIndentLevel = indentLevel + 1
+          serializeAST(node, options, newIndentLevel)
+        .filter((str) -> _.isString(str) and str isnt '\n')
         .value()
 
       if children.length

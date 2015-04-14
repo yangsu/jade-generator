@@ -20,8 +20,13 @@ cases = _.filter fs.readdirSync(casesPath), (testCase) ->
   # TODO: support inline-tag
   testCase isnt 'inline-tag.jade'
 
-stripUnsupportedProperties = (ast) ->
-  walk ast, (node, replace) -> replace(_.omit(node, 'line', 'selfClosing'))
+stripUnsupportedProperties = (ast = {}) ->
+  for key, val of ast
+    if _.isObject(val)
+      ast[key] = stripUnsupportedProperties(val)
+    else if _.isArray(val)
+      ast[key] = _.map val, stripUnsupportedProperties
+  _.omit(ast, 'line', 'selfClosing')
 
 describe 'cases', ->
   _.each cases, (testCase, i) ->

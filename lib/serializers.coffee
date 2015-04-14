@@ -64,7 +64,9 @@ serializeAttributeBlocks = (attributeBlocks) ->
 
 exports.Block = (node) -> if node.yield then 'yield' else ''
 
-exports.BlockComment = (node) -> if node.buffer then '//' else '//-'
+exports.BlockComment = (node) ->
+  comment = if node.buffer then '//' else '//-'
+  if node.val then "#{comment}#{node.val}" else comment
 
 exports.Case = (node) -> "case #{node.expr}"
 
@@ -94,7 +96,7 @@ exports.Doctype = (node) ->
 exports.Each = (node) ->
   "for #{node.val}, #{node.key} in #{node.obj}"
 
-exports.Extends = (node) -> "extends #{node.path}"
+exports.Extends = (node) -> "extends #{node.file.path}"
 
 exports.Filter = (node) ->
   ":#{node.name}#{serializeAttributes(node.attrs)}"
@@ -102,7 +104,7 @@ exports.Filter = (node) ->
 exports.Include = (node) ->
   filter = if node.filter then ":#{node.filter}" else ''
   attrs = serializeAttributes(node.attrs)
-  "include#{filter}#{attrs} #{node.path}"
+  "include#{filter}#{attrs} #{node.file.path}"
 
 exports.Mixin = (node) ->
   str = ''
@@ -141,10 +143,10 @@ exports.Tag = (node) ->
   return str
 
 exports.Text = (text, options) ->
-  text = text.val
-  if text.length and not options.noPrefix
-    "| #{text}"
+  val = text.val
+  if val.length and not options.noPrefix and val isnt '\n' and not text.isHtml
+    "| #{val}"
   else
-    text
+    val
 
 exports.When = (node) -> "when #{node.expr}"
